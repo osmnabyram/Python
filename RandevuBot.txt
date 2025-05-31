@@ -1,0 +1,130 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.common.by import By
+from PIL import Image
+import pytesseract
+import os
+
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+driver = webdriver.Chrome()
+driver.get("***")
+driver.maximize_window()
+
+tc = "***"
+sifre = "***"
+
+tcyaz = driver.find_element(By.ID, "txtTCPasaport")
+tcyaz.send_keys(tc)
+
+sifreyaz = driver.find_element(By.ID, "txtSifre")
+sifreyaz.send_keys(sifre)
+
+nickler = [
+    "btnGirisYap",
+    "checkBox",
+    "closeModal",
+    "Seanslarım",
+    "liUyeGiris"
+]
+
+nickler2 = [
+    "btnGirisYap",
+    "closeModal",
+    "Seanslarım",
+    "closeModal",
+    "pageContent_rptListe_lbtnSeansSecim_0",
+    "closeModal",
+    "-o günün randevu idsi-"
+]
+
+def click_elements(nickler):
+    for nick in nickler:
+        try:
+            element = driver.find_element(By.CLASS_NAME, nick)
+            element.click()
+        except:
+            try:
+                element = driver.find_element(By.ID, nick)
+                element.click()
+            except:
+                try:
+                    element = driver.find_element(By.CSS_SELECTOR, nick)
+                    element.click()
+                except:
+                    try:
+                        element = driver.find_element(By.XPATH, nick)
+                        element.click()
+                    except:
+                        try:
+                            element = driver.find_element(By.LINK_TEXT, nick)
+                            element.click()
+                        except:
+                            try:
+                                element = driver.find_element(By.PARTIAL_LINK_TEXT, nick)
+                                element.click()
+                            except:
+                                print("Element not found: " + nick)
+
+def save_and_extract_text(captcha_img):
+    os.makedirs(r'C:\Users\osman\OneDrive\Masaüstü\fotodos', exist_ok=True)
+    captcha_img_path = r'C:\Users\osman\OneDrive\Masaüstü\fotodos\fotolar.png'
+    captcha_img.save(captcha_img_path)
+
+    text = pytesseract.image_to_string(captcha_img)
+    text = ''.join([char for char in text if not char.islower()])
+    return text
+
+click_elements(nickler)
+click_elements(nickler2)
+
+time.sleep(2)
+
+element = driver.find_element(By.ID, "pageContent_cboxOnay")
+element.click()
+
+time.sleep(2)
+
+captcha_element = driver.find_element(By.ID, "pageContent_captchaImage")
+location = captcha_element.location
+size = captcha_element.size
+
+driver.save_screenshot("full_screenshot.png")
+
+x = location['x']
+y = location['y']
+width = size['width']
+height = size['height']
+
+full_img = Image.open("full_screenshot.png")
+captcha_img = full_img.crop((x, y + 135, x + width + 125, y + height + 125))
+
+text = save_and_extract_text(captcha_img)
+retry_count = 0
+
+while len(text) < 6 and retry_count < 3:
+    print("Çıkan sonuc 6 karakterden az, bir kez daha deneniyor")
+    time.sleep(1) 
+    captcha_img = full_img.crop((x, y + 135, x + width + 125, y + height + 125)) 
+    text = save_and_extract_text(captcha_img)
+    retry_count += 1
+
+if len(text) == 8:
+    text = text[1:-1]
+elif len(text) != 6:
+    print("metin okunamadı")
+    driver.quit()
+
+print(text)
+
+driver.execute_script("""
+    var form = document.querySelector('form');
+    if (form) {
+        form.onsubmit = function(event) { event.preventDefault(); };
+    }
+""")
+
+captcha_text_input = driver.find_element(By.ID, "pageContent_txtCaptchaText")
+captcha_text_input.send_keys(text)
+
+time.sleep(600)

@@ -1,0 +1,19 @@
+a=float(input("ilk degerinizi giriniz "))
+b=float(input("diger degerinizi giriniz "))
+
+print("""hangi işlemi yapmak istiyorsunuz
+1-toplama
+2-çıkarma
+3-çarpma
+4-bölme""")
+
+istek = int(input("hangisini yapmak istiyorsunuz "))
+
+if istek == 1:
+    print(a + b)
+elif istek == 2:
+    print(a - b)
+elif istek == 3:
+    print(a * b)
+elif istek == 4:
+    print(a / b)
