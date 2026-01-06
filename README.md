@@ -3,7 +3,7 @@ Bu depo, Python ile geliştirilmiş otomasyon, bot sistemleri, veri işleme, alg
 Basit seviyeden ileri seviyeye kadar çeşitli Python konseptlerini içeren projeler barındırır.
 </p>
 
-<h3>🧠 Python Temel ve Orta Seviye Uygulamalar:</h3>
+<h3> Python Temel ve Orta Seviye Uygulamalar:</h3>
 <ul>
   <li>Döngüler, fonksiyonlar, listeler ve sözlük yapıları</li>
   <li>Dosya okuma-yazma işlemleri</li>
@@ -11,7 +11,7 @@ Basit seviyeden ileri seviyeye kadar çeşitli Python konseptlerini içeren proj
   <li>Modüler kodlama ve fonksiyonel programlama örnekleri</li>
 </ul>
 
-<h3>🤖 Otomasyon ve Bot Projeleri:</h3>
+<h3> Otomasyon ve Bot Projeleri:</h3>
 <ul>
   <li>Selenium ile web otomasyon çalışmaları</li>
   <li>Randevu alma botu</li>
@@ -19,7 +19,7 @@ Basit seviyeden ileri seviyeye kadar çeşitli Python konseptlerini içeren proj
   <li>Web scraping ile veri toplama örnekleri</li>
 </ul>
 
-<h3>📊 Veri İşleme ve Analiz:</h3>
+<h3>Veri İşleme ve Analiz:</h3>
 <ul>
   <li>CSV, JSON, TXT dosyalarından veri okuma</li>
   <li>Veri temizleme ve düzenleme örnekleri</li>
@@ -27,14 +27,14 @@ Basit seviyeden ileri seviyeye kadar çeşitli Python konseptlerini içeren proj
   <li>Matris, liste manipülasyonu, filtreleme işlemleri</li>
 </ul>
 
-<h3>🗂 Mini Uygulamalar ve Araçlar:</h3>
+<h3></h3> Mini Uygulamalar ve Araçlar:</h3>
 <ul>
   <li>Hesap makinesi, zamanlayıcı, sayaç</li>
   <li>Şifre oluşturucu, metin dönüştürücü</li>
   <li>Basit kayıt ve takip sistemleri</li>
 </ul>
 
-<h3>🛠 Algoritmalar ve Problem Çözümler:</h3>
+<h3> Algoritmalar ve Problem Çözümler:</h3>
 <ul>
   <li>Arama, sıralama algoritmaları</li>
   <li>Özyineleme (recursion) örnekleri</li>
