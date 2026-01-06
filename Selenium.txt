@@ -1,0 +1,148 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
+
+nickler = [
+    "dn-slide-accept-btn",  
+    "CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll",  
+    "pointer-events-auto",
+    "Sempatizan",
+    "addToCart",
+    ".btn.basket-modal__btn-shipping.font-weight-600.p-10.text-center",
+    "checkout"
+]
+
+nickler2 = [
+    "checkout",
+    "actionBtn.btnAddressContinue"
+]
+
+eposta = "osmanbayram2882@gmail.com"
+sifre = "****"
+kartisim = "osman bayram"
+kartno = "***"
+ay = "***"
+yil = "***"
+CVV = "***"
+
+driver = webdriver.Chrome()
+driver.get("****")
+driver.maximize_window()
+
+time.sleep(8)
+
+def yazilma(nickler):
+    kaydir = 0
+    for nick in nickler:
+        kaydir += 1
+        try:
+            element = driver.find_element(By.CLASS_NAME, nick)
+            element.click()
+            time.sleep(2)
+            if kaydir == 3:
+                driver.execute_script("window.scrollTo(0, 1500)")
+                time.sleep(2)
+        except:
+            try:
+                element = driver.find_element(By.ID, nick)
+                element.click()
+                time.sleep(2)
+                if kaydir == 3:
+                    driver.execute_script("window.scrollTo(0, 1500)")
+                    time.sleep(2)
+            except:
+                try:
+                    element = driver.find_element(By.CSS_SELECTOR, nick)
+                    element.click()
+                    time.sleep(2)
+                    if kaydir == 3:
+                        driver.execute_script("window.scrollTo(0, 1500)")
+                        time.sleep(2)
+                except:
+                    try:
+                        element = driver.find_element(By.XPATH, nick)
+                        element.click()
+                        time.sleep(2)
+                        if kaydir == 3:
+                            driver.execute_script("window.scrollTo(0, 1500)")
+                            time.sleep(2)
+                    except:
+                        try:
+                            element = driver.find_element(By.LINK_TEXT, nick)
+                            element.click()
+                            time.sleep(2)
+                            if kaydir == 3:
+                                driver.execute_script("window.scrollTo(0, 1500)")
+                                time.sleep(2)
+                        except:
+                            try:
+                                element = driver.find_element(By.PARTIAL_LINK_TEXT, nick)
+                                element.click()
+                                time.sleep(2)
+                                if kaydir == 3:
+                                    driver.execute_script("window.scrollTo(0, 1500)")
+                                    time.sleep(2)
+                            except:
+                                print("Element not found: " + nick)
+
+def yazilma2(nickler2):
+    for nick1 in nickler2:
+        try:
+            element = driver.find_element(By.CLASS_NAME, nick1)
+            element.click()
+            time.sleep(2)
+        except:
+            try:
+                element = driver.find_element(By.ID, nick1)
+                element.click()
+                time.sleep(2)
+            except:
+                try:
+                    element = driver.find_element(By.CSS_SELECTOR, nick1)
+                    element.click()
+                    time.sleep(2)
+                except:
+                    try:
+                        element = driver.find_element(By.XPATH, nick1)
+                        element.click()
+                        time.sleep(2)
+                    except:
+                        try:
+                            element = driver.find_element(By.LINK_TEXT, nick1)
+                            element.click()
+                            time.sleep(2)
+                        except:
+                            try:
+                                element = driver.find_element(By.PARTIAL_LINK_TEXT, nick1)
+                                element.click()
+                                time.sleep(2)
+                            except:
+                                print("Element not found: " + nick1)
+
+yazilma(nickler)
+
+driver.find_element(By.ID, "email").send_keys(eposta)
+driver.find_element(By.ID, "password").send_keys(sifre)
+
+driver.execute_script("window.scrollTo(0, 300)")
+
+time.sleep(15)
+
+yazilma2(nickler2)
+
+driver.execute_script("window.scrollTo(0, 300)")
+
+driver.find_element(By.ID, "CardholderName").send_keys(kartisim)
+driver.find_element(By.ID, "CardNumber").send_keys(kartno)
+
+aysecim = Select(driver.find_element(By.ID, "ExpireMonth"))
+aysecim.select_by_visible_text(ay)
+
+yilsecim = Select(driver.find_element(By.ID, "ExpireYear"))
+yilsecim.select_by_visible_text(yil)
+
+driver.find_element(By.ID, "CardCode").send_keys(CVV)
+
+time.sleep(360)  
+driver.quit()
