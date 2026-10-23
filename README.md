@@ -14,6 +14,10 @@ From beginner exercises to Selenium automation and an appointment bot — a grow
 
 ---
 
+<div align="center">
+<img src="assets/how-it-works.svg" alt="How it works: an animated diagram of the tool's core flow." width="820" />
+</div>
+
 ## About
 
 This repository is a project archive built while learning and working with Python. It spans everything from core language exercises to practical automation scripts, organised by theme below.
